@@ -1,0 +1,30 @@
+version: '2'
+
+# for local environment only
+services:
+  mongo:
+    restart: always
+    image: mongo:4.0
+    hostname: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: junction2018-backend
+    environment:
+      MONGODB_URL: mongodb://mongo/test
+      WAIT_HOSTS: mongo:27017
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    volumes:
+      - ./src:/app/src

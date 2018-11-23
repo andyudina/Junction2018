@@ -1,0 +1,14 @@
+# NPM related
+node_modules/
+npm-debug.log
+package-lock.json
+
+# OS related
+**/.DS_Store
+
+# MongoDB data
+**/data
+
+# Build
+**/dist
+**/builds

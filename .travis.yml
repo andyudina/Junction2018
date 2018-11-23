@@ -1,0 +1,26 @@
+language: node_js
+
+node_js:
+- '8'
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+
+before_deploy:
+  npm run build
+
+deploy:
+  provider: elasticbeanstalk
+  skip_cleanup: true
+  zip_file: builds/build.zip
+  access_key_id: "$ACCESSKEYID"
+  secret_access_key:
+    secure: "$SECRETACCESSKEY"
+  region: "eu-central-1"
+  app: "Junction2018-backend"
+  env: "Junction2018Backend-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-367672148638"
+  on:
+    branch: master
